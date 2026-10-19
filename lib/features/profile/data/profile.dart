@@ -6,6 +6,7 @@ class Profile {
     this.universityId,
     this.departmentId,
     this.classYear,
+    this.avatarUrl,
   });
 
   final String id;
@@ -14,6 +15,7 @@ class Profile {
   final int? universityId;
   final int? departmentId;
   final int? classYear;
+  final String? avatarUrl;
 
   // Onboarding'de doldurulan alanların hepsi dolu mu?
   bool get isComplete =>
@@ -33,6 +35,7 @@ class Profile {
       universityId: json['university_id'] as int?,
       departmentId: json['department_id'] as int?,
       classYear: json['class_year'] as int?,
+      avatarUrl: json['avatar_url'] as String?,
     );
   }
 }

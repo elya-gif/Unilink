@@ -8,13 +8,18 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/auth/presentation/login_page.dart';
 import '../../features/home/presentation/home_page.dart';
+import '../../features/profile/data/profile_repository.dart';
 import '../../features/profile/presentation/onboarding_page.dart';
+import '../../features/profile/presentation/skills_page.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
 
   final refresh = _RouterRefreshStream(authRepository.authStateChanges());
   ref.onDispose(refresh.dispose);
+
+  // Profil yüklenince/değişince de redirect kurallarını tekrar çalıştır
+  ref.listen(currentProfileProvider, (previous, next) => refresh.notify());
 
   return GoRouter(
     initialLocation: '/',
@@ -25,9 +30,21 @@ final routerProvider = Provider<GoRouter>((ref) {
       final onAuthPage = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register';
 
-      if (!loggedIn && !onAuthPage) return '/login'; 
-      if (loggedIn && onAuthPage) return '/';        
-      return null;                                  
+      if (!loggedIn && !onAuthPage) return '/login';
+      if (loggedIn && onAuthPage) return '/';
+
+      if (loggedIn) {
+        final profileAsync = ref.read(currentProfileProvider);
+        // Profil henüz yükleniyorsa karar verme; gelince listen tekrar tetikler
+        if (profileAsync.isLoading) return null;
+
+        final profile = profileAsync.value;
+        final onOnboarding = state.matchedLocation == '/onboarding';
+        if (profile != null && !profile.isComplete && !onOnboarding) {
+          return '/onboarding';
+        }
+      }
+      return null;
     },
 
     routes: [
@@ -47,6 +64,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/onboarding',
         builder: (context, state) => const OnboardingPage(),
       ),
+      GoRoute(
+        path: '/skills',
+        builder: (context, state) => const SkillsPage(),
+      ),
     ],
   );
 });
@@ -59,6 +80,9 @@ class _RouterRefreshStream extends ChangeNotifier {
   }
 
   late final StreamSubscription<dynamic> _subscription;
+
+  // Stream dışından da (örn. profil değişince) router'ı uyarabilmek için
+  void notify() => notifyListeners();
 
   @override
   void dispose() {

@@ -39,12 +39,12 @@
 - Login/register: `ConsumerStatefulWidget`, `Form` + validator, `_isLoading`, Supabase hata mesajları Türkçeye çevriliyor.
 - Supabase: Confirm email geliştirme için KAPALI (yayından önce açılacak). `dev_email_allowlist` tablosu: .edu.tr olmayan test mailleri (geliştiricinin maili ekli). Referans tabloları `anon` için okunabilir.
 - Geliştirici her oturumda bir-iki küçük parçayı kendisi yazıyor; yorulunca hazır kod istiyor, sorun değil ama farkları açıklamak faydalı.
-- Sıradaki: Hafta 3 onboarding (aşağıda), sonra yetenek seçimi ve profil fotoğrafı. (İsteğe bağlı: şifremi unuttum.)
+- Yetenek seçimi ✅ çalışıyor: `skill.dart`, `skills_page.dart` (FilterChip, kategoriye göre), `/skills` rotası, `saveSkills` (sil + ekle). Geliştirici görevi: ana sayfaya `/skills` butonu. Profil fotoğrafı ✅ çalışıyor: `avatar_picker.dart` (image_picker, 512px), `uploadAvatar` → Storage `avatars/{uid}/avatar.jpg`, `profiles.avatar_url`. Bucket + policy Supabase'de kuruldu. HAFTA 3 BİTTİ (19 Ekim); sıradaki: Hafta 4-5 proje ilanları. (İsteğe bağlı: şifremi unuttum.)
 
 ## Devam eden iş (Hafta 3, onboarding — 3 adım)
 1. ✅ Profili okumak: `Profile` modeli (`fromJson`, `isComplete`), `ProfileRepository.getProfile`, `currentProfileProvider` (FutureProvider, `authStateProvider`'ı watch eder), `home_page.dart` profili `AsyncValue.when` ile gösteriyor. Kalan: geliştirici ana sayfaya "Profil tamam: Evet/Hayır" satırını kendisi yazacak, uygulamayı deneyip commit edecek. Önce bunu sor / dosyadan kontrol et.
 2. ✅ Çalışıyor (simülatörde denendi): `lib/features/profile/presentation/onboarding_page.dart`, `/onboarding` rotası, `LookupItem` modeli, `universitiesProvider`/`departmentsProvider`, `updateProfile` (`.select().single()` ile RLS'yi fark eder). Sınıf 1–6 arası (DB'de check constraint bilinmiyor). Ana sayfada "Profili düzenle" butonu var. Plan: ad soyad, kullanıcı adı (unique; 23505 hatasını Türkçeye çevir), üniversite ve bölüm (dropdown, tablolardan), sınıf. `ProfileRepository.updateProfile` eklenecek; kaydedince `ref.invalidate(currentProfileProvider)`.
-3. ⬜ Router: giriş yapmış ama `isComplete == false` ise `/onboarding`'e yönlendir; `ref.listen(currentProfileProvider)` ile router'ı yenile.
+3. ✅ Çalışıyor (redirect + ref.listen + _RouterRefreshStream.notify; onboarding kaydedince taze profili bekliyor). Router: giriş yapmış ama `isComplete == false` ise `/onboarding`'e yönlendir; `ref.listen(currentProfileProvider)` ile router'ı yenile.
 
 ## Temel kurallar
 - Kayıt sadece `.edu.tr` mail ile (veritabanı trigger'ı kontrol ediyor). Geliştirme sırasında test için bu kontrol geçici olarak gevşetilebilir; ileride mezunlar için ayrı doğrulama düşünülecek.

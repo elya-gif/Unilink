@@ -36,6 +36,10 @@ class HomePage extends ConsumerWidget {
               child: const Text('Profili düzenle'),
             ),
             TextButton(
+              onPressed: () => context.push('/skills'),
+              child: const Text('Yetenekler'),
+            ),
+            TextButton(
               onPressed: () => ref.read(authRepositoryProvider).signOut(),
               child: const Text('Çıkış yap'),
             ),

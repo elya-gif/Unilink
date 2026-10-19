@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../auth/data/auth_repository.dart';
 import '../data/lookup_item.dart';
 import '../data/profile_repository.dart';
+import 'avatar_picker.dart';
 
 class OnboardingPage extends ConsumerStatefulWidget {
   const OnboardingPage({super.key});
@@ -62,8 +63,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             departmentId: _departmentId!,
             classYear: _classYear!,
           );
-      // Profil değişti: eski kaydı at, bir sonraki watch'ta yeniden çekilsin
+      // Profili yeniden çek ve bitmesini bekle; yoksa router eski (eksik)
+      // profili görüp bizi tekrar onboarding'e gönderir
       ref.invalidate(currentProfileProvider);
+      await ref.read(currentProfileProvider.future);
       if (mounted) context.go('/');
     } on PostgrestException catch (e) {
       _showError(_translateError(e));
@@ -102,6 +105,8 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const AvatarPicker(),
+                const SizedBox(height: 24),
                 TextFormField(
                   controller: _fullNameController,
                   textCapitalization: TextCapitalization.words,
