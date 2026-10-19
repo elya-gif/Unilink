@@ -11,6 +11,7 @@ import '../../features/home/presentation/home_page.dart';
 import '../../features/profile/data/profile_repository.dart';
 import '../../features/profile/presentation/onboarding_page.dart';
 import '../../features/profile/presentation/skills_page.dart';
+import '../../features/projects/presentation/project_detail_page.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
@@ -67,6 +68,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/skills',
         builder: (context, state) => const SkillsPage(),
+      ),
+      GoRoute(
+        // :id = adresin değişken kısmı, örn. /projects/12
+        path: '/projects/:id',
+        builder: (context, state) => ProjectDetailPage(
+          projectId: int.parse(state.pathParameters['id']!),
+        ),
       ),
     ],
   );

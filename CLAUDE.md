@@ -76,3 +76,9 @@ Sonraki sürümlere: portföy profili, ekip arkadaşı onayı, mentor rozeti, b�
 - GitHub reposu açık, düzenli ve anlamlı commit mesajları.
 - Temiz klasör mimarisi (feature bazlı: `lib/features/auth`, `lib/features/projects` ...).
 - README'de ekran görüntüleri, teknoloji listesi ve demo GIF'i.
+
+## Devam eden iş (Hafta 4, proje ilanları — dal: feature/projects)
+1. ✅ Liste çalışıyor: `lib/features/projects/data/project.dart` (`Project`, `ProjectRole`), `project_repository.dart` (`getProjects`: `*, competitions(name), project_roles(id, title, slots)`), `project_card.dart`; ana sayfa artık proje listesi (avatar menüsü: profil/yetenekler/çıkış, boş durum, aşağı çek-yenile).
+2. ✅ Detay çalışıyor: `project_detail_page.dart`, `/projects/:id`, `projectProvider`/`projectOwnerProvider` (family), rol yetenekleri `skills(name)` ile. Başvur butonu şimdilik SnackBar. Geliştirici görevi: ProjectCard'a dokununca detaya gitme (InkWell + context.push).
+3. ⬜ İlan açma formu (başlık, açıklama, yarışma, roller + slots, rol yetenekleri).
+- Şema: projects(id, owner_id, competition_id?, title, description, status enum project_status default 'recruiting', open_to_other_universities bool, created_at, updated_at); project_roles(id, project_id, title, description?, slots smallint default 1); project_role_skills(role_id, skill_id); competitions(id, name, organizer, description, url, application_deadline, event_date).
