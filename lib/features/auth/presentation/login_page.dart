@@ -86,7 +86,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     autocorrect: false,
                     decoration: const InputDecoration(
                       labelText: 'Üniversite maili',
-                      border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -104,7 +103,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Şifre',
-                      border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {

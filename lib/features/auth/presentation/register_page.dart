@@ -85,7 +85,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   decoration: const InputDecoration(
                     labelText: 'Üniversite maili',
                     hintText: 'ad.soyad@ogr.universite.edu.tr',
-                    border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -103,7 +102,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   obscureText: true, // şifreyi noktalarla gizle
                   decoration: const InputDecoration(
                     labelText: 'Şifre',
-                    border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.length < 8) {
@@ -118,7 +116,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Şifre (tekrar)',
-                    border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value != _passwordController.text) {

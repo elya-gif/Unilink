@@ -32,6 +32,7 @@
 ## Mevcut durum (Oturum 3, 19 Ekim 2026)
 - Dosyalar: `lib/main.dart` (env boşsa fail-fast), `lib/app.dart`, `lib/core/router/app_router.dart`, `lib/core/theme/app_theme.dart`, `lib/features/auth/data/auth_repository.dart`, `lib/features/auth/presentation/login_page.dart`, `lib/features/auth/presentation/register_page.dart`, `lib/features/home/presentation/home_page.dart`, `lib/features/profile/data/profile.dart`, `lib/features/profile/data/profile_repository.dart`
 - Git: çalışma `feature/onboarding-profile` dalında (henüz commit yok, main'e merge edilmedi).
+- Tema: akademik palet (bordo ana, lacivert, krem arka plan; yeşil=başarı, kırmızı=hata), Manrope fontu, `AppColors` sınıfı. Sayfalarda `border:` yazma, tema veriyor. Fikir (ileride): profilde kullanıcının üniversite rengi vurgu olarak.
 - Takvim: bir hafta önde (19 Ekim = 2. hafta başı, iş 3. haftada).
 - Bilinen küçük sorunlar: `test/widget_test.dart` var olmayan `MyApp`'i kullanıyor (flutter analyze hatası); `main.dart`'ta `anonKey` deprecated → `publishableKey`.
 - Geliştirici kod içi açıklama yorumlarını bilerek siliyor; geri ekleme.

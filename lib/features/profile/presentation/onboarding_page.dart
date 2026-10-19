@@ -112,7 +112,6 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   textCapitalization: TextCapitalization.words,
                   decoration: const InputDecoration(
                     labelText: 'Ad soyad',
-                    border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.trim().length < 3) {
@@ -128,7 +127,6 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   decoration: const InputDecoration(
                     labelText: 'Kullanıcı adı',
                     hintText: 'ornek_kullanici',
-                    border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     final text = value?.trim().toLowerCase() ?? '';
@@ -157,7 +155,6 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                   initialValue: _classYear,
                   decoration: const InputDecoration(
                     labelText: 'Sınıf',
-                    border: OutlineInputBorder(),
                   ),
                   items: [
                     for (var year = 1; year <= 6; year++)
@@ -209,7 +206,6 @@ class _LookupDropdown extends StatelessWidget {
         isExpanded: true, // uzun üniversite adları taşmasın
         decoration: InputDecoration(
           labelText: label,
-          border: const OutlineInputBorder(),
         ),
         items: [
           for (final item in items)
