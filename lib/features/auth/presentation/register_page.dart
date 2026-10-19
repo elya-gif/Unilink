@@ -94,7 +94,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     if (!value.contains('@')) {
                       return 'Geçerli bir mail adresi gir';
                     }
-                    return null; // null = hata yok
+                    return null;
                   },
                 ),
                 const SizedBox(height: 16),
@@ -129,7 +129,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ),
                 const SizedBox(height: 24),
                 FilledButton(
-                  // Yüklenirken butonu devre dışı bırak (çift tıklamayı önler)
+                 
                   onPressed: _isLoading ? null : _submit,
                   child: _isLoading
                       ? const SizedBox(

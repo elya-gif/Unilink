@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../../features/auth/presentation/login_page.dart';
 import '../../features/home/presentation/home_page.dart';
+import '../../features/profile/presentation/onboarding_page.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authRepository = ref.watch(authRepositoryProvider);
@@ -41,6 +42,10 @@ final routerProvider = Provider<GoRouter>((ref) {
        GoRoute(
         path: '/register',
         builder: (context, state) => const RegisterPage(),
+      ),
+      GoRoute(
+        path: '/onboarding',
+        builder: (context, state) => const OnboardingPage(),
       ),
     ],
   );

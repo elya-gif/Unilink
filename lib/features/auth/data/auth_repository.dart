@@ -24,3 +24,9 @@ class AuthRepository {
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepository(Supabase.instance.client);
 });
+
+// Giriş/çıkış olaylarını yayınlayan provider.
+// Başka provider'lar bunu watch ederek auth değişince kendini yeniler.
+final authStateProvider = StreamProvider<AuthState>((ref) {
+  return ref.watch(authRepositoryProvider).authStateChanges();
+});
