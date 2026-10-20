@@ -5,13 +5,15 @@ class ProjectRole {
     required this.slots,
     this.description,
     this.skillNames = const [],
+    this.skillIds = const [],
   });
 
   final int id;
   final String title;
   final int slots; // bu rolde kaç kişi aranıyor
   final String? description;
-  final List<String> skillNames; // rolün istediği yetenekler (sadece detayda dolu)
+  final List<String> skillNames; // rolün istediği yetenekler
+  final List<int> skillIds;
 
   factory ProjectRole.fromJson(Map<String, dynamic> json) {
     final skills = json['skills'] as List<dynamic>? ?? [];
@@ -21,6 +23,7 @@ class ProjectRole {
       slots: json['slots'] as int,
       description: json['description'] as String?,
       skillNames: [for (final skill in skills) skill['name'] as String],
+      skillIds: [for (final skill in skills) if (skill['id'] != null) skill['id'] as int],
     );
   }
 }

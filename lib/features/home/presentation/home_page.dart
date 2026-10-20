@@ -7,6 +7,7 @@ import '../../auth/data/auth_repository.dart';
 import '../../profile/data/profile_repository.dart';
 import '../../projects/data/project_repository.dart';
 import '../../projects/presentation/project_card.dart';
+import '../../projects/presentation/project_filter_bar.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -53,6 +54,11 @@ class HomePage extends ConsumerWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => context.push('/projects/new'),
+        icon: const Icon(Icons.add),
+        label: const Text('İlan aç'),
+      ),
       // Aşağı çekince listeyi yenile
       body: RefreshIndicator(
         onRefresh: () => ref.refresh(projectsProvider.future),
@@ -70,6 +76,8 @@ class HomePage extends ConsumerWidget {
               'Ekip arayan projeler',
               style: TextStyle(color: AppColors.navy.withValues(alpha: 0.6)),
             ),
+            const SizedBox(height: 16),
+            const ProjectFilterBar(),
             const SizedBox(height: 16),
             ...projectsAsync.when(
               data: (projects) => projects.isEmpty
