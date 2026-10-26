@@ -31,7 +31,7 @@
 
 ## Mevcut durum (Oturum 3, 19 Ekim 2026)
 - Dosyalar: `lib/main.dart` (env boşsa fail-fast), `lib/app.dart`, `lib/core/router/app_router.dart`, `lib/core/theme/app_theme.dart`, `lib/features/auth/data/auth_repository.dart`, `lib/features/auth/presentation/login_page.dart`, `lib/features/auth/presentation/register_page.dart`, `lib/features/home/presentation/home_page.dart`, `lib/features/profile/data/profile.dart`, `lib/features/profile/data/profile_repository.dart`
-- Git: çalışma `feature/onboarding-profile` dalında (henüz commit yok, main'e merge edilmedi).
+- Git: her iş kendi dalında (feature/...), bitince main'e merge + push. Hafta 4-5 main'de (26 Ekim).
 - Tema: akademik palet (bordo ana, lacivert, krem arka plan; yeşil=başarı, kırmızı=hata), Manrope fontu, `AppColors` sınıfı. Sayfalarda `border:` yazma, tema veriyor. Fikir (ileride): profilde kullanıcının üniversite rengi vurgu olarak.
 - Takvim: bir hafta önde (19 Ekim = 2. hafta başı, iş 3. haftada).
 - Bilinen küçük sorunlar: `test/widget_test.dart` var olmayan `MyApp`'i kullanıyor (flutter analyze hatası); `main.dart`'ta `anonKey` deprecated → `publishableKey`.
@@ -82,4 +82,4 @@ Sonraki sürümlere: portföy profili, ekip arkadaşı onayı, mentor rozeti, b�
 2. ✅ Detay çalışıyor: `project_detail_page.dart`, `/projects/:id`, `projectProvider`/`projectOwnerProvider` (family), rol yetenekleri `skills(name)` ile. Başvur butonu şimdilik SnackBar. Geliştirici görevi: ProjectCard'a dokununca detaya gitme (InkWell + context.push).
 3. ✅ Form çalışıyor: `create_project_page.dart`, `/projects/new` (`:id`'den önce), ana sayfada "İlan aç" FAB, `createProject` (proje → roller → rol yetenekleri, atomik değil), `competitionsProvider`.
 - Şema: projects(id, owner_id, competition_id?, title, description, status enum project_status default 'recruiting', open_to_other_universities bool, created_at, updated_at); project_roles(id, project_id, title, description?, slots smallint default 1); project_role_skills(role_id, skill_id); competitions(id, name, organizer, description, url, application_deadline, event_date).
-4. 🔄 Filtreleme (Hafta 5) yazıldı, denenmedi: `project_filter.dart` (`ProjectFilter` + `ProjectFilterNotifier`, NotifierProvider), `project_filter_bar.dart` (arama onSubmitted, "Ekip arayanlar" varsayılan açık, yarışma/yetenek bottom sheet). Arama/yarışma/durum sunucuda; yetenek filtresi telefonda (rol `skillIds`). Form + filtre henüz commit edilmedi.
+4. ✅ Filtreleme (Hafta 5) çalışıyor: `project_filter.dart` (`ProjectFilter` + `ProjectFilterNotifier`, NotifierProvider), `project_filter_bar.dart` (arama onSubmitted, "Ekip arayanlar" varsayılan açık, yarışma/yetenek bottom sheet). Arama/yarışma/durum sunucuda; yetenek filtresi telefonda (rol `skillIds`).
